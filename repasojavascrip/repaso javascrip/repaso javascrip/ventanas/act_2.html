@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../css/act_1.css">
+    <title>PokeAPI Demo</title>
+</head>
+<body>
+    <div class="container container-fluid" style="background-color: #e6cdad;">
+        <div class="row">
+            <div class="col-12 text-white" style="background-color: #aaa4a1;">
+                <h1 class="text-center py-5">Pokemon Aleatorio</h1>
+            </div>
+        </div>
+        <div class="container d-flex align-items-center justify-content-center">
+            <div class="row">
+                <div class="col-12 py-3 align-items-center">
+                    <button class="btn btn-light me-md-2" onclick="obtenerPokemonAleatorio()">Obtener Pokemon Aleatorio</button>
+                </div>
+                <div class="col-12 py-5">
+                    <div id="imagenCont"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const baseUrl = "https://pokeapi.co/api/v2";
+
+        const obtenerPokemonAleatorio = async () => {
+            try {
+                // Obtener un número aleatorio entre 1 y 898 (cantidad total de Pokémon)
+                const randomId = Math.floor(Math.random() * 898) + 1;
+
+                // Obtener los datos del Pokémon aleatorio
+                const respuesta = await fetch(`${baseUrl}/pokemon/${randomId}`);
+                const datosPokemon = await respuesta.json();
+
+                // Obtener la URL de la imagen del Pokémon
+                const imagenUrl = datosPokemon.sprites.front_default;
+
+                // Mostrar la imagen del Pokémon
+                mostrarImagen(imagenUrl);
+            } catch (error) {
+                console.error("Error al obtener los datos del Pokémon:", error);
+            }
+        }
+
+        const mostrarImagen = (url) => {
+            // Obtener una referencia al div
+            let imagenCont = document.getElementById("imagenCont");
+
+            // Crear un nuevo elemento para la imagen
+            let imagen = document.createElement("img");
+
+            // Limpiar el contenido existente
+            imagenCont.innerHTML = '';
+
+            // Establecer la URL de la imagen
+            imagen.src = url;
+
+            // Agregar la imagen al contenedor en el HTML
+            imagenCont.appendChild(imagen);
+        }
+    </script>
+</body>
+</html>

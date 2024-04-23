@@ -1,0 +1,12 @@
+.bodyfondo{
+    background-color: #858480;
+}
+
+.contenedor{
+    background-color: rgb(189, 180, 180);
+}
+
+.fondo{
+    background-image: url(../img/fondo.png);
+    background-color: #857f68;
+}
